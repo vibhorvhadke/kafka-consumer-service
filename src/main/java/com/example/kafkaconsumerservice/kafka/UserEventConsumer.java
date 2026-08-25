@@ -15,7 +15,11 @@ public class UserEventConsumer {
 
     private final UserRepository userRepository;
 
-    @KafkaListener(topics = "user-events", groupId = "user-events-group")
+    @KafkaListener(
+            topics = "user-events",
+            groupId = "user-events-group",
+            containerFactory = "kafkaListenerContainerFactory"
+    )
     public void consume(UserEvent event) {
         log.info("Received event: {}", event);
 
